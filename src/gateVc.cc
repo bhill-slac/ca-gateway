@@ -771,6 +771,7 @@ void gateVcData::setPvData(gdd* dd)
 
 #if DEBUG_GDD
     heading("gateVcData::setPvData",name());
+    dumpdd(1,"pv_data (old property data)",name(),pv_data);
     dumpdd(1,"dd (new property data)",name(),dd);
 #endif
 
@@ -914,9 +915,12 @@ void gateVcData::copyState(gdd &dd)
 			}
 			convertContainerMemberToAtomic(dd, gddAppType_value, count);
 		}
+#if DEBUG_GDD || DEBUG_ENUM
+        dumpdd(5,"dd(before event_data)",name(),&dd);
+        dumpdd(4,"copyState (new event_data)",name(),event_data);
+#endif
 		table.smartCopy(&dd,event_data);
 #if DEBUG_GDD || DEBUG_ENUM
-		dumpdd(4,"event_data",name(),event_data);
 		dumpdd(5,"dd(after event_data)",name(),&dd);
 #endif
 #if DEBUG_EVENT_DATA
